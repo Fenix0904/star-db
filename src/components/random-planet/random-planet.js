@@ -25,17 +25,17 @@ export default class RandomPlanet extends Component {
         })
     };
 
-    updatePlanet() {
-        const id = 12000;
+    updatePlanet = () => {
+        const id = Math.floor(Math.random() * 10) + 2;
         this.swapiService
             .getPlanet(id)
             .then(this.onPlanetLoaded)
             .catch(this.onError);
-    }
+    };
 
-    constructor() {
-        super();
+    componentDidMount() {
         this.updatePlanet();
+        this.interval = setInterval(this.updatePlanet, 3500)
     }
 
     render() {
