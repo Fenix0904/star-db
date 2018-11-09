@@ -1,5 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import Header from "../header/header";
 import ItemList from "../item-list/item-list";
 import PersonDetails from "../person-details/person-details"
