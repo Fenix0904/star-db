@@ -24,7 +24,6 @@ export default class ItemList extends React.Component {
         if (!itemList) {
             return <Spinner/>
         }
-
         const items = this.renderItems(itemList);
         return (
             <ul className="item-list list-group">
@@ -34,12 +33,14 @@ export default class ItemList extends React.Component {
     }
 
     renderItems(arr) {
-        return arr.map(({id, name}) => {
+        return arr.map((item) => {
+            const {id} = item;
+            const label = this.props.renderItem(item);
             return (
                 <li className="list-group-item"
                     key={id}
                     onClick={() => this.props.onItemSelected(id)}>
-                    {name}
+                    {label}
                 </li>
             )
         });
