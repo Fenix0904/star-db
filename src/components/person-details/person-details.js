@@ -4,6 +4,7 @@ import './person-details.css';
 import SwapiService from "../../services/SwapiService";
 import Spinner from "../spinner/spinner";
 import ErrorIndicator from "../error-indicator/error-indicator";
+import ErrorBoundary from "../error-boundary/error-boundary"
 
 export default class PersonDetails extends React.Component {
 
@@ -14,25 +15,12 @@ export default class PersonDetails extends React.Component {
         loading: true,
         error: false
     };
-
-    componentDidMount() {
-        this.updatePerson();
-    }
-
-    componentDidUpdate(prevProps) {
-        if (this.props.personId !== prevProps.personId) {
-            this.setState({loading: true});
-            this.updatePerson();
-        }
-    }
-
     onError = (err) => {
         this.setState({
             error: true,
             loading: false
         })
     };
-
     updatePerson = () => {
         const {personId} = this.props;
         if (!personId) {
@@ -50,6 +38,17 @@ export default class PersonDetails extends React.Component {
             })
             .catch(this.onError);
     };
+
+    componentDidMount() {
+        this.updatePerson();
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.personId !== prevProps.personId) {
+            this.setState({loading: true});
+            this.updatePerson();
+        }
+    }
 
     render() {
         const {person, loading, error} = this.state;
@@ -79,7 +78,7 @@ const PersonView = ({person}) => {
         <React.Fragment>
             <img className="person-image"
                  alt="person"
-                 src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`} />
+                 src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`}/>
 
             <div className="card-body">
                 <h4>{name}</h4>
