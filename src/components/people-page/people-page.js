@@ -4,7 +4,7 @@ import ItemDetails, {Record} from "../item-details/item-details";
 import SwapiService from "../../services/SwapiService";
 import Row from ".././row/row"
 import ErrorBoundary from "../error-boundary/error-boundary"
-import {PersonList, PlanetList} from "../sw-components";
+import {PersonDetails, PersonList, PlanetList} from "../sw-components";
 
 export default class PeoplePage extends React.Component {
 
@@ -23,19 +23,11 @@ export default class PeoplePage extends React.Component {
     render() {
 
         const personDetails = (
-            <ItemDetails
-                getData={this.swapiService.getPerson}
-                getImageUrl={this.swapiService.getPersonImage}
-                itemId={this.state.selectedPerson}>
-                <Record field="gender" label="Gender"/>
-                <Record field="eyeColor" label="Eye Color"/>
-            </ItemDetails>
+            <PersonDetails id={this.state.selectedPerson}/>
         );
 
         const itemList = (
-            <PersonList onItemSelected={this.onPersonSelected}
-                        renderItem={({name}) => name}
-            />
+            <PersonList onItemSelected={this.onPersonSelected}/>
         );
 
         return (

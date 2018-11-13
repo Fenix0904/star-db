@@ -1,6 +1,6 @@
 import React from 'react';
 import SwapiService from "../../services/SwapiService";
-import WithData from '../hoc-helper/with-data';
+import withData from '../hoc-helper/with-data';
 import ItemDetails, {Record} from "../item-details/item-details";
 
 const {
