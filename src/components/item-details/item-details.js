@@ -1,7 +1,6 @@
 import React from 'react';
 
 import './item-details.css';
-import SwapiService from "../../services/SwapiService";
 import Spinner from "../spinner/spinner";
 import ErrorIndicator from "../error-indicator/error-indicator";
 
