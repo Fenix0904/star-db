@@ -1,30 +1,11 @@
 import React from "react";
 import "./item-list.css";
 
-import Spinner from "../spinner/spinner";
-
-export default class ItemList extends React.Component {
-
-    state = {
-        itemList: null
-    };
-
-    componentDidMount() {
-        const {getData} = this.props;
-        getData()
-            .then((itemList) => {
-                this.setState({
-                    itemList: itemList
-                })
-            });
-    }
+class ItemList extends React.Component {
 
     render() {
-        const {itemList} = this.state;
-        if (!itemList) {
-            return <Spinner/>
-        }
-        const items = this.renderItems(itemList);
+        const {data} = this.props;
+        const items = this.renderItems(data);
         return (
             <ul className="item-list list-group">
                 {items}
@@ -46,3 +27,5 @@ export default class ItemList extends React.Component {
         });
     }
 }
+
+export default ItemList;

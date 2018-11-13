@@ -1,10 +1,10 @@
 import React from 'react';
 import "./people-page.css"
-import ItemList from "../item-list/item-list";
 import ItemDetails, {Record} from "../item-details/item-details";
 import SwapiService from "../../services/SwapiService";
 import Row from ".././row/row"
 import ErrorBoundary from "../error-boundary/error-boundary"
+import {PersonList, PlanetList} from "../sw-components";
 
 export default class PeoplePage extends React.Component {
 
@@ -33,11 +33,11 @@ export default class PeoplePage extends React.Component {
         );
 
         const itemList = (
-            <ItemList onItemSelected={this.onPersonSelected}
-                      getData={this.swapiService.getAllPeople}
-                      renderItem={({name}) => name}
+            <PersonList onItemSelected={this.onPersonSelected}
+                        renderItem={({name}) => name}
             />
         );
+
         return (
             <ErrorBoundary>
                 <Row

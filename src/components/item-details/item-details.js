@@ -7,15 +7,13 @@ import ErrorIndicator from "../error-indicator/error-indicator";
 
 export default class ItemDetails extends React.Component {
 
-    _swapiService = new SwapiService();
-
     state = {
         item: null,
         loading: true,
         error: false,
         image: null
     };
-    onError = (err) => {
+    onError = () => {
         this.setState({
             error: true,
             loading: false
