@@ -1,13 +1,10 @@
 import React from 'react';
 
 import './item-details.css';
-import SwapiService from "../../services/SwapiService";
 import Spinner from "../spinner/spinner";
 import ErrorIndicator from "../error-indicator/error-indicator";
 
 export default class ItemDetails extends React.Component {
-
-    _swapiService = new SwapiService();
 
     state = {
         item: null,
@@ -15,13 +12,13 @@ export default class ItemDetails extends React.Component {
         error: false,
         image: null
     };
-    onError = (err) => {
+    onError = () => {
         this.setState({
             error: true,
             loading: false
         })
     };
-    updatePerson = () => {
+    updateItem = () => {
         const {itemId, getData, getImageUrl} = this.props;
         if (!itemId) {
             this.setState({loading: false});
@@ -40,13 +37,13 @@ export default class ItemDetails extends React.Component {
     };
 
     componentDidMount() {
-        this.updatePerson();
+        this.updateItem();
     }
 
     componentDidUpdate(prevProps) {
         if (this.props.itemId !== prevProps.itemId) {
             this.setState({loading: true});
-            this.updatePerson();
+            this.updateItem();
         }
     }
 
@@ -61,7 +58,7 @@ export default class ItemDetails extends React.Component {
         const errorMessage = error ? <ErrorIndicator/> : null;
         const notification = !(item || error || loading) ? <span>Select a person from a list</span> : null;
         const spinner = loading && !notification ? <Spinner/> : null;
-        const content = hasData ?  <ItemView item={item} image={image} fields={fields}/> : null;
+        const content = hasData ? <ItemView item={item} image={image} fields={fields}/> : null;
         return (
             <div className="person-details card">
                 {errorMessage}

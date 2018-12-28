@@ -1,10 +1,10 @@
 import React from 'react';
 import "./people-page.css"
-import ItemList from "../item-list/item-list";
-import ItemDetails, {Record} from "../item-details/item-details";
 import SwapiService from "../../services/SwapiService";
 import Row from ".././row/row"
 import ErrorBoundary from "../error-boundary/error-boundary"
+import {PersonList} from "../sw-components/item-lists";
+import {PersonDetails, PlanetDetails, StarshipDetails} from "../sw-components/details";
 
 export default class PeoplePage extends React.Component {
 
@@ -23,19 +23,12 @@ export default class PeoplePage extends React.Component {
     render() {
 
         const personDetails = (
-            <ItemDetails
-                getData={this.swapiService.getPerson}
-                getImageUrl={this.swapiService.getPersonImage}
-                itemId={this.state.selectedPerson}>
-                <Record field="gender" label="Gender"/>
-                <Record field="eyeColor" label="Eye Color"/>
-            </ItemDetails>
+            <PersonDetails itemId={this.state.selectedPerson}/>
         );
 
         const itemList = (
-            <ItemList onItemSelected={this.onPersonSelected}
-                      getData={this.swapiService.getAllPeople}
-                      renderItem={({name}) => name}
+            <PersonList onItemSelected={this.onPersonSelected}
+                        renderItem={({name}) => name}
             />
         );
         return (
@@ -43,6 +36,10 @@ export default class PeoplePage extends React.Component {
                 <Row
                     left={itemList}
                     right={personDetails}
+                />
+                <Row
+                    left={<PlanetDetails itemId={this.state.selectedPerson}/>}
+                    right={<StarshipDetails itemId={9}/>}
                 />
             </ErrorBoundary>
         );
