@@ -27,9 +27,7 @@ export default class PeoplePage extends React.Component {
         );
 
         const itemList = (
-            <PersonList onItemSelected={this.onPersonSelected}
-                        renderItem={({name}) => name}
-            />
+            <PersonList onItemSelected={this.onPersonSelected}/>
         );
         return (
             <ErrorBoundary>

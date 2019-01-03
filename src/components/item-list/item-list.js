@@ -14,9 +14,10 @@ class ItemList extends React.Component {
     }
 
     renderItems(arr) {
+        const { children: renderLabel } = this.props;
         return arr.map((item) => {
             const {id} = item;
-            const label = this.props.renderItem(item);
+            const label = renderLabel(item);
             return (
                 <li className="list-group-item"
                     key={id}

@@ -5,9 +5,26 @@ import ItemList from "../item-list/item-list";
 
 const swapiService = new SwapiService();
 
-const PersonList = withData(ItemList, swapiService.getAllPeople);
-const PlanetList = withData(ItemList, swapiService.getAllPlanets);
-const StarshipList = withData(ItemList, swapiService.getAllStarShips);
+const withChildFunction = (Wrapped, fn) => {
+    return (props) => {
+        return (
+            <Wrapped {...props}>
+                {fn}
+            </Wrapped>
+        )
+    };
+};
+const renderName = ({name}) => <span>{name}</span>;
+
+const PersonList = withData(
+                            withChildFunction(ItemList, renderName),
+                            swapiService.getAllPeople);
+const PlanetList = withData(
+                            withChildFunction(ItemList, renderName),
+                            swapiService.getAllPlanets);
+const StarshipList = withData(
+                            withChildFunction(ItemList, renderName),
+                            swapiService.getAllStarShips);
 
 export {
     PersonList,
