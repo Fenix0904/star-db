@@ -1,12 +1,9 @@
 import React, {Component} from 'react';
 import './random-planet.css';
-import SwapiService from "../../services/SwapiService";
 import Spinner from "../spinner/spinner";
 import ErrorIndicator from "../error-indicator/error-indicator";
 
 export default class RandomPlanet extends Component {
-
-    swapiService = new SwapiService();
 
     state = {
         planet: {},
@@ -18,7 +15,7 @@ export default class RandomPlanet extends Component {
         this.setState({planet, loading: false});
     };
 
-    onError = (err) => {
+    onError = () => {
         this.setState({
             error: true,
             loading: false
@@ -27,8 +24,7 @@ export default class RandomPlanet extends Component {
 
     updatePlanet = () => {
         const id = Math.floor(Math.random() * 10) + 2;
-        this.swapiService
-            .getPlanet(id)
+        this.props.getPlanet(id)
             .then(this.onPlanetLoaded)
             .catch(this.onError);
     };
@@ -72,6 +68,7 @@ const PlanetView = ({planet}) => {
     return (
         <React.Fragment>
             <img className="planet-image"
+                 alt=""
                  src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`}/>
             <div>
                 <h4>{name}</h4>

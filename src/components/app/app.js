@@ -4,10 +4,12 @@ import Header from "../header/header";
 import "./app.css";
 import ErrorBoundary from "../error-boundary/error-boundary";
 import SwapiService from "../../services/SwapiService";
-import RandomPlanet from "../random-planet/random-planet";
-import PeoplePage from "../people-page/people-page";
 import {SwapiProvider} from "../swapi-service-context/context";
 import TestSwapiService from "../../services/TestSwapiService";
+import PeoplePage from "../pages/people-page";
+import PlanetPage from "../pages/planet-page";
+import StarshipPage from "../pages/starship-page";
+import RandomPlanet from "../sw-components/random-planet";
 
 export default class App extends React.Component {
 
@@ -25,7 +27,6 @@ export default class App extends React.Component {
     };
 
     render() {
-
         return (
             <ErrorBoundary>
                 <SwapiProvider value={this.state.swapiService}>
@@ -33,6 +34,8 @@ export default class App extends React.Component {
                     <RandomPlanet className="rndpl"/>
                     <div className="body">
                         <PeoplePage/>
+                        <PlanetPage/>
+                        <StarshipPage/>
                     </div>
                 </SwapiProvider>
             </ErrorBoundary>

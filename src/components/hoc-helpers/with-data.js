@@ -1,12 +1,14 @@
 import React from "react";
 import Spinner from "../spinner/spinner";
+import ErrorIndicator from "../error-indicator/error-indicator";
 
 const withData = (View) => {
     return class extends React.Component {
 
         state = {
             data: null,
-            loading: true
+            loading: true,
+            error: false
         };
 
         componentDidUpdate(prevProps) {
@@ -27,16 +29,24 @@ const withData = (View) => {
                         data: data,
                         loading: false
                     })
-                });
+                })
+                .catch(() => [
+                    this.setState({
+                        error: true
+                    })
+                ]);
         }
 
         render() {
-            const {data, loading} = this.state;
-            if (!data || loading) {
+            const {data, loading, error} = this.state;
+            if (loading) {
                 return (
                     <ul className="item-list list-group">
                         <Spinner/>
                     </ul>)
+            }
+            if (error) {
+                return <ErrorIndicator/>;
             }
             return <View {...this.props} data={data}/>
         }
