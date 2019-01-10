@@ -21,6 +21,7 @@ export default class Header extends React.Component {
                         <a href="#">Starships</a>
                     </li>
                 </ul>
+                <button onClick={this.props.onChangeService} className="btn btn-primary btn-sm">Change service!</button>
             </div>
         );
     }

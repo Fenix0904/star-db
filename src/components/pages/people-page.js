@@ -1,8 +1,8 @@
 import React from 'react';
-import "./people-page.css"
 import Row from ".././row/row"
 import ErrorBoundary from "../error-boundary/error-boundary"
-import {PersonDetails, PersonList, PlanetList} from "../sw-components";
+import {PersonList} from "../sw-components/item-lists";
+import PersonDetails from "../sw-components/person-details";
 
 export default class PeoplePage extends React.Component {
 
@@ -17,15 +17,13 @@ export default class PeoplePage extends React.Component {
     };
 
     render() {
-
         const personDetails = (
-            <PersonDetails id={this.state.selectedPerson}/>
+            <PersonDetails itemId={this.state.selectedPerson}/>
         );
 
         const itemList = (
             <PersonList onItemSelected={this.onPersonSelected}/>
         );
-
         return (
             <ErrorBoundary>
                 <Row

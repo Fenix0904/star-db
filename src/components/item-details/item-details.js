@@ -18,7 +18,7 @@ export default class ItemDetails extends React.Component {
             loading: false
         })
     };
-    updatePerson = () => {
+    updateItem = () => {
         const {itemId, getData, getImageUrl} = this.props;
         if (!itemId) {
             this.setState({loading: false});
@@ -37,13 +37,16 @@ export default class ItemDetails extends React.Component {
     };
 
     componentDidMount() {
-        this.updatePerson();
+        this.updateItem();
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.itemId !== prevProps.itemId) {
+        if (this.props.itemId !== prevProps.itemId ||
+            this.props.getData !== prevProps.getData ||
+            this.props.getImageUrl !== prevProps.getImageUrl) {
+
             this.setState({loading: true});
-            this.updatePerson();
+            this.updateItem();
         }
     }
 
@@ -58,7 +61,7 @@ export default class ItemDetails extends React.Component {
         const errorMessage = error ? <ErrorIndicator/> : null;
         const notification = !(item || error || loading) ? <span>Select a person from a list</span> : null;
         const spinner = loading && !notification ? <Spinner/> : null;
-        const content = hasData ?  <ItemView item={item} image={image} fields={fields}/> : null;
+        const content = hasData ? <ItemView item={item} image={image} fields={fields}/> : null;
         return (
             <div className="person-details card">
                 {errorMessage}
