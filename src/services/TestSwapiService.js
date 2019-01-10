@@ -65,11 +65,11 @@ export default class TestSwapiService {
         return this._planets[0]
     };
 
-    getAllStarships = async () => {
+    getAllStarShips = async () => {
         return this._starships;
     };
 
-    getStarship = async () => {
+    getStarShip = async () => {
         return this._starships[0];
     };
 
@@ -77,7 +77,7 @@ export default class TestSwapiService {
         return `https://placeimg.com/400/500/people`
     };
 
-    getStarshipImage = () => {
+    getStarShipImage = () => {
         return `https://placeimg.com/600/400/tech`;
     };
 

@@ -30,11 +30,11 @@ const withData = (View) => {
                         loading: false
                     })
                 })
-                .catch(() => [
+                .catch(() => {
                     this.setState({
                         error: true
                     })
-                ]);
+                });
         }
 
         render() {
