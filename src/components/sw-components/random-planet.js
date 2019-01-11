@@ -7,4 +7,4 @@ const mapMethodsToProps = (swapiService) => {
     }
 };
 
-export default withSwapiService(RandomPlanet, mapMethodsToProps);
+export default withSwapiService(mapMethodsToProps)(RandomPlanet);

@@ -1,51 +1,50 @@
 import React from "react";
 import withData from "../hoc-helpers/with-data";
 import withSwapiService from "../hoc-helpers/with-swapi-service";
+import withChildFunction from "../hoc-helpers/with-child-function";
 import ItemList from "../item-list/item-list";
+import compose from "../hoc-helpers/compose";
 
-const withChildFunction = (Wrapped, fn) => {
-    return (props) => {
-        return (
-            <Wrapped {...props}>
-                {fn}
-            </Wrapped>
-        )
-    };
-};
 const renderName = ({name}) => <span>{name}</span>;
 
 const mapPersonMethodsToProps = (swapiService) => {
     return {
-        getData: swapiService.getAllPeople,
+        getData: swapiService.getAllPeople
     };
 };
 
 const mapPlanetMethodsToProps = (swapiService) => {
     return {
-        getData: swapiService.getAllPlanets,
+        getData: swapiService.getAllPlanets
     }
 };
 
 const mapStarshipMethodsToProps = (swapiService) => {
     return {
-        getData: swapiService.getAllStarShips,
+        getData: swapiService.getAllStarShips
     }
 };
 
-const PersonList = withSwapiService(
-                                withData(withChildFunction(ItemList, renderName)),
-                                mapPersonMethodsToProps);
+const PersonList = compose(
+    withSwapiService(mapPersonMethodsToProps),
+    withData,
+    withChildFunction(renderName)
+)(ItemList);
 
-const PlanetList = withSwapiService(
-                                withData(withChildFunction(ItemList, renderName)),
-                                mapPlanetMethodsToProps);
+const PlanetList = compose(
+    withSwapiService(mapPlanetMethodsToProps),
+    withData,
+    withChildFunction(renderName)
+)(ItemList);
 
-const StarshipList = withSwapiService(
-                                withData(withChildFunction(ItemList, renderName)),
-                                mapStarshipMethodsToProps);
+const StarShipList = compose(
+    withSwapiService(mapStarshipMethodsToProps),
+    withData,
+    withChildFunction(renderName)
+)(ItemList);
 
 export {
     PersonList,
     PlanetList,
-    StarshipList
+    StarShipList
 };
