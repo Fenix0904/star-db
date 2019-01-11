@@ -29,4 +29,8 @@ class ItemList extends React.Component {
     }
 }
 
+ItemList.defaultProps = {
+    onItemSelected: () => {}
+};
+
 export default ItemList;
