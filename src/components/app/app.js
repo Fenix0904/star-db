@@ -11,6 +11,9 @@ import PlanetPage from "../pages/planet-page";
 import StarshipPage from "../pages/starship-page";
 import RandomPlanet from "../sw-components/random-planet";
 
+import {BrowserRouter as Router, Route} from "react-router-dom";
+import StarshipDetails from "../sw-components/starship-details";
+
 export default class App extends React.Component {
 
     state = {
@@ -30,13 +33,24 @@ export default class App extends React.Component {
         return (
             <ErrorBoundary>
                 <SwapiProvider value={this.state.swapiService}>
-                    <Header onChangeService={this.onChangeService}/>
-                    <RandomPlanet className="rndpl"/>
-                    <div className="body">
-                        <PeoplePage/>
-                        <PlanetPage/>
-                        <StarshipPage/>
-                    </div>
+                    <Router>
+                        <React.Fragment>
+                            <Header onChangeService={this.onChangeService}/>
+                            <RandomPlanet className="rndpl"/>
+                            <div className="body">
+                                <Route path="/"
+                                       exact
+                                       render={() => <h2>Welcome!</h2>}/>
+                                <Route path="/people" component={PeoplePage}/>
+                                <Route path="/planets" component={PlanetPage}/>
+                                <Route path="/starships" exact component={StarshipPage}/>
+                                <Route path="/starships/:id"
+                                       render={({match}) => {
+                                           return <StarshipDetails itemId={match.params.id}/>
+                                       }}/>
+                            </div>
+                        </React.Fragment>
+                    </Router>
                 </SwapiProvider>
             </ErrorBoundary>
         )
