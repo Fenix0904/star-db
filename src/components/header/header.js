@@ -13,13 +13,13 @@ export default class Header extends React.Component {
                 </h3>
                 <ul className="d-flex">
                     <li>
-                        <Link to="/people">People</Link>
+                        <Link to="/people/">People</Link>
                     </li>
                     <li>
-                        <Link to="/planets">Planets</Link>
+                        <Link to="/planets/">Planets</Link>
                     </li>
                     <li>
-                        <Link to="/starships">Starships</Link>
+                        <Link to="/starships/">Starships</Link>
                     </li>
                 </ul>
                 <button onClick={this.props.onChangeService} className="btn btn-primary btn-sm">Change service!</button>
