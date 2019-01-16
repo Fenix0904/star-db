@@ -13,11 +13,18 @@ import RandomPlanet from "../sw-components/random-planet";
 
 import {BrowserRouter as Router, Route} from "react-router-dom";
 import StarshipDetails from "../sw-components/starship-details";
+import SecretPage from "../pages/secret-page";
+import LoginPage from "../pages/login-page";
 
 export default class App extends React.Component {
 
     state = {
-        swapiService: new SwapiService()
+        swapiService: new SwapiService(),
+        isLoggedIn: false
+    };
+
+    onLogin = () => {
+        this.setState({isLoggedIn: true})
     };
 
     onChangeService = () => {
@@ -48,6 +55,9 @@ export default class App extends React.Component {
                                        render={({match}) => {
                                            return <StarshipDetails itemId={match.params.id}/>
                                        }}/>
+                                <Route path="/secret" render={() => <SecretPage isLoggedIn={this.state.isLoggedIn}/>}/>
+                                <Route path="/login"
+                                       render={() => <LoginPage isLoggedIn={this.state.isLoggedIn} onLogin={this.onLogin}/>}/>
                             </div>
                         </React.Fragment>
                     </Router>
